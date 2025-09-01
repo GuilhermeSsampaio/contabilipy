@@ -1,0 +1,39 @@
+version: "3.9"
+services:
+  backend:
+    build: ./backend
+    command: uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/app
+    environment:
+      - ENV_FILE=./env
+    restart: unless-stopped
+
+  interface:
+    build: ./interface
+    command: streamlit run app.py --server.port=8501 --server.address=0.0.0.0
+    ports:
+      - "8501:8501"
+    volumes:
+      - ./interface:/app
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+  db:
+    image: mysql:8
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=contpy
+      - MYSQL_USER=contpyuser
+      - MYSQL_PASSWORD=contpypass
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    restart: unless-stopped
+
+volumes:
+  mysql_data:

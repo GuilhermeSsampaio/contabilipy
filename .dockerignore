@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.swp
+*.egg-info/
+dist/
+build/
+
+# Virtual environment
+venv/
+../venv
+
+# Git
+.git
+.gitignore
+
+# IDEs
+.idea/
+.vscode/
+
+# Local env files
+*.env
+
+# Misc
+*.log
+.DS_Store

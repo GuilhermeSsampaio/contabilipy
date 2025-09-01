@@ -1,0 +1,37 @@
+version: "3.9"
+services:
+  backend:
+      build: ./backend
+      ports:
+        - "8000:8000"
+      environment:
+        - ENV_FILE = ./env
+      volumes:
+        - ./backend:/app
+      restart: unless-stopped
+
+  interface:
+      build: ./interface
+      ports:
+        - "8501:8501"
+      depends_on:
+        - backend
+      volumes:
+        - ./interface:/app
+      restart: unless-stopped
+
+  db:
+    image: mysql:8
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=contpy
+      - MYSQL_USER=contpyuser
+      - MYSQL_PASSWORD=contpypass
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    restart: unless-stopped
+
+volumes:
+  mysql_data:

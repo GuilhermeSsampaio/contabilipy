@@ -1,0 +1,29 @@
+# Python
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+*.swp
+*.egg-info/
+dist/
+build/
+
+# Virtual environment
+../venv
+venv/
+.env
+backend/.env
+interface/.env
+
+# IDEs
+.idea/
+.vscode/
+*.iml
+
+# Docker
+*.log
+docker-compose.override.yml
+
+# Misc
+*.sqlite3
+.DS_Store
