@@ -9,6 +9,10 @@ INTERFACE_URL = os.getenv("INTERFACE_URL", "http://localhost:8501")
 def root():
     return "Rota home"
 
+@app.get("/health")
+def health():
+    return {"status":"ok"}
+
 @app.get("/interface")
 def interface():
         return RedirectResponse(INTERFACE_URL)

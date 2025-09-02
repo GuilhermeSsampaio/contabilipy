@@ -34,5 +34,13 @@ services:
       - mysql_data:/var/lib/mysql
     restart: unless-stopped
 
+  tests:
+    build: ./backend
+    volumes:
+      - ./backend:/app
+    command: pytest -v --disable-warnings
+    depends_on:
+      - db
+
 volumes:
   mysql_data:
