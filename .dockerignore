@@ -26,3 +26,5 @@ venv/
 # Misc
 *.log
 .DS_Store
+
+saved_files/
